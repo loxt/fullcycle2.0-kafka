@@ -11,7 +11,7 @@ func main() {
 	producer := NewKafkaProducer()
 	defer producer.Close()
 
-	PublishMessage("New Message", "test", producer, nil, deliveryChan)
+	PublishMessage("Trasferencia efetuada de 25.000", "test", producer, []byte("transferencia"), deliveryChan)
 	go DeliveryReport(deliveryChan)
 	producer.Flush(2000)
 }
