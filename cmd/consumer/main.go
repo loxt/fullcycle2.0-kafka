@@ -10,6 +10,7 @@ func main() {
 		"bootstrap.servers": "fullcycle20-kafka-kafka-1:9092",
 		"client.id":         "goapp-consumer",
 		"group.id":          "goapp-group",
+		"auto.offset.reset": "earliest",
 	}
 	consumer, error := kafka.NewConsumer(&configMap)
 	if error != nil {
