@@ -13,12 +13,15 @@ func main() {
 
 	PublishMessage("New Message", "test", producer, nil, deliveryChan)
 	go DeliveryReport(deliveryChan)
-	producer.Flush(1000)
+	producer.Flush(2000)
 }
 
 func NewKafkaProducer() *kafka.Producer {
 	configMap := &kafka.ConfigMap{
-		"bootstrap.servers": "fullcycle20-kafka-kafka-1:9092",
+		"bootstrap.servers":   "fullcycle20-kafka-kafka-1:9092",
+		"delivery.timeout.ms": "5000",
+		"acks":                "all",
+		"enable.idempotence":  "true",
 	}
 	producer, err := kafka.NewProducer(configMap)
 	if err != nil {
